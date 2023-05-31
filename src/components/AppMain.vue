@@ -6,12 +6,17 @@ export default {
 
     data() {
         return {
-
+            projects: [],
+            baseUrl: 'http://127.0.0.1:8000'
         }
     },
     methods: {
         getProject() {
-
+            axios.get(`${this.baseUrl}/api/projects`)
+                .then(response => {
+                    this.projects = response.data;
+                    console.log(response.data);
+                })
         }
     },
     mounted() {
