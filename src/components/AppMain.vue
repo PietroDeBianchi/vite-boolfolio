@@ -1,32 +1,5 @@
-<script>
-import axios from 'axios';
-
-export default {
-    name: 'AppMain',
-
-    data() {
-        return {
-            projects: [],
-            baseUrl: 'http://127.0.0.1:8000'
-        }
-    },
-    methods: {
-        getProject() {
-            axios.get(`${this.baseUrl}/api/projects`)
-                .then(response => {
-                    this.projects = response.data.results;
-                    console.log(response.data.results);
-                })
-        }
-    },
-    mounted() {
-        this.getProject();
-    }
-}
-</script>
-
 <template>
-    <div class="container">
+    <div class="container my-4">
         <div class="d-flex flex-wrap justify-content-between">
             <div v-for="project in  projects " class="mt-4">
                 <div class=" card" style="width: 18rem; min-height: 26rem;">
@@ -45,7 +18,52 @@ export default {
                 </div>
             </div>
         </div>
+        <div class="pages mt-3">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item me-2">
+                        <button @click="getProject(currentPage - 1)" class="btn btn-primary previous">&laquo;</button>
+                    </li>
+                    <li class="page-item me-2">
+                        <button @click="getProject(currentPage + 1)" class="btn btn-primary next">&raquo;</button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </div>
 </template>
+
+<script>
+import axios from 'axios';
+
+export default {
+    name: 'AppMain',
+
+    data() {
+        return {
+            projects: [],
+            baseUrl: 'http://127.0.0.1:8000',
+            currentPage: 1
+        }
+    },
+    methods: {
+        getProject(pageScroll) {
+            axios.get(`${this.baseUrl}/api/projects`, {
+                params: {
+                    page: pageScroll // don't forget this.
+                }
+            })
+                .then(response => {
+                    console.log(response);
+                    this.projects = response.data.results.data;
+                    this.currentPage = response.data.results.current_page;
+                })
+        }
+    },
+    mounted() {
+        this.getProject(1);
+    }
+}
+</script>
 
 <style lang="scss"></style>
