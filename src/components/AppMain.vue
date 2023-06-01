@@ -54,9 +54,9 @@ export default {
                 }
             })
                 .then(response => {
-                    console.log(response);
                     this.projects = response.data.results.data;
                     this.currentPage = response.data.results.current_page;
+                    console.log(response);
                 })
         }
     },
