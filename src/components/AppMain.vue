@@ -3,8 +3,9 @@
         <div class="d-flex flex-wrap justify-content-between">
             <div v-for="project in  projects " class="mt-4">
                 <div class=" card" style="width: 18rem; min-height: 26rem;">
-                    <img v-if="project.image" :src="`${this.baseUrl}/storage/${project.image}`" class="card-img-top"
+                    <img v-if="project.image" :src="`${baseUrl}/storage/${project.image}`" class="card-img-top"
                         :alt="project.title">
+
                     <img v-else src="https://i.ebayimg.com/images/g/BBYAAOSwT-Neb3XT/s-l400.jpg" class="card-img-top"
                         :alt="project.title">
                     <div class="card-body d-flex flex-column justify-content-between">
