@@ -1,1 +1,16 @@
 @import 'node_modules/bootstrap/scss/bootstrap';
+
+#cardContainer {
+
+    img {
+        height: 50%;
+    }
+
+    .cardInfo {
+        overflow: hidden;
+
+        .rounded-pill {
+            font-size: 10px;
+        }
+    }
+}
