@@ -1,26 +1,35 @@
 <template>
-    <div class="container col-xxl-8 px-4 py-5">
-        <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-            <div class="col-10 col-sm-8 col-lg-6">
-                <img src="bootstrap-themes.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700"
-                    height="500" loading="lazy">
+    <div class="card" id="cardContainer" style="width: 18rem; height: 26rem;">
+        <img v-if="project.image" :src="`${store.baseUrl}/storage/${project.image}`" class="card-img-top"
+            :alt="project.title">
+        <img v-else src="https://i.ebayimg.com/images/g/BBYAAOSwT-Neb3XT/s-l400.jpg" class="card-img-top"
+            :alt="project.title">
+        <div class="card-body d-flex flex-column justify-content-between">
+            <div class="cardInfo">
+                <h5 class="card-title">{{ project.title }}</h5>
+                <span class="badge rounded-pill text-bg-primary me-1" v-for="technology in project.technologies"
+                    :key="technology.id">
+                    {{ technology.type }}
+                </span>
+                <p class="card-text my-1">{{ project.sub_title }}</p>
             </div>
-            <div class="col-lg-6">
-                <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Responsive left-aligned hero with image</h1>
-                <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most
-                    popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system,
-                    extensive prebuilt components, and powerful JavaScript plugins.</p>
-                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                    <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
-                    <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
-                </div>
-            </div>
+            <a href="#" class="btn btn-primary">See full Project</a>
         </div>
     </div>
 </template>
 
 <script>
+import { store } from '../store.js'
 
+export default {
+    name: 'AppProject',
+    props: ['project'],
+    data() {
+        return {
+            store
+        }
+    }
+}
 </script>
 
 <style lang="scss"></style>
