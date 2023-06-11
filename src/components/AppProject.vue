@@ -13,7 +13,9 @@
                 </span>
                 <p class="card-text my-1">{{ project.sub_title }}</p>
             </div>
-            <a href="#" class="btn btn-primary">See full Project</a>
+            <router-link :to="{ name: 'Project Page', params: { slug: project.slug } }" class="btn btn-primary">
+                See Full Project
+            </router-link>
         </div>
     </div>
 </template>
