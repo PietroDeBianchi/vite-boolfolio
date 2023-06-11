@@ -1,9 +1,3 @@
-<script>
-export default {
-    name: 'AppHeader'
-}
-</script>
-
 <template>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
@@ -14,13 +8,34 @@ export default {
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    <a class="nav-link" href="#">Projects</a>
-                    <a class="nav-link" href="#">DEV</a>
+                    <li class="nav-item" v-for="item in headerNavbar">
+                        <router-link :to="{ name: item.route }" class="nav-link">{{ item.label }}</router-link>
+                    </li>
                 </div>
             </div>
         </div>
     </nav>
 </template>
+
+<script>
+export default {
+    name: 'AppHeader',
+
+    data() {
+        return {
+            headerNavbar: [
+                {
+                    label: 'Home',
+                    route: 'Home'
+                },
+                {
+                    label: 'Projects List',
+                    route: 'Projects List'
+                }
+            ]
+        }
+    }
+}
+</script>
 
 <style lang="scss"></style>
