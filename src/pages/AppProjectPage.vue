@@ -23,16 +23,23 @@
 </template>
 
 <script>
+import axios from 'axios';
+import { store } from '../store.js'
+
 export default {
     name: 'AppProjectPage',
     data() {
         return {
-
+            store
         }
     },
     mounted() {
         const slug = this.$route.params.slug;
-        console.log(slug)
+
+        axios.get(`${this.store.baseUrl}/api/projects/${slug}`)
+            .then(response => {
+                console.log(response)
+            })
     }
 }
 </script>
