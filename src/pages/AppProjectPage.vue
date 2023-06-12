@@ -1,17 +1,20 @@
 <template>
-    <div class="container col-xxl-8 px-4 py-5">
+    <div class="container col-xxl-8 px-4 py-5" v-if="project">
         <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
             <div class="col-10 col-sm-8 col-lg-6">
-                <img src="bootstrap-themes.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700"
-                    height="500" loading="lazy">
+                <img v-if="project.image" :src="`${store.baseUrl}/storage/${project.image}`" class="card-img-top"
+                    :alt="project.title">
+                <img v-else src="https://i.ebayimg.com/images/g/BBYAAOSwT-Neb3XT/s-l400.jpg" class="card-img-top"
+                    :alt="project.title">
             </div>
             <div class="col-lg-6">
-                <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Responsive left-aligned hero with image</h1>
-                <h4></h4>
-                <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most
-                    popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system,
-                    extensive prebuilt components, and powerful JavaScript plugins.
-                </p>
+                <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">{{ project.title }}</h1>
+                <span class="badge rounded-pill text-bg-primary me-1" v-for="technology in project.technologies"
+                    :key="technology.id">
+                    {{ technology.type }}
+                </span>
+                <h5 class="lead mt-2">{{ project.sub_title }}</h5>
+                <p>{{ project.description }}</p>
                 <div>
                     <router-link :to="{ name: 'Projects List' }" class="btn btn-primary">
                         Go Back to List
@@ -20,6 +23,7 @@
             </div>
         </div>
     </div>
+    <div v-else></div>
 </template>
 
 <script>
@@ -30,7 +34,8 @@ export default {
     name: 'AppProjectPage',
     data() {
         return {
-            store
+            store,
+            project: null
         }
     },
     mounted() {
@@ -38,7 +43,12 @@ export default {
 
         axios.get(`${this.store.baseUrl}/api/projects/${slug}`)
             .then(response => {
-                console.log(response)
+                if (response.data.success == true) {
+                    // Update the project data, current page, and last page based on the API response
+                    this.project = response.data.project;
+                } else {
+                    alert(response.data.error)
+                }
             })
     }
 }
