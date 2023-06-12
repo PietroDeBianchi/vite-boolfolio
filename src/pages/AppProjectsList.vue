@@ -17,9 +17,12 @@
                         <button @click="getProject(currentPage - 1)" class="btn btn-primary previous"
                             :class="{ 'disabled': currentPage == 1 }">&laquo;</button>
                     </li>
-                    <li class="page-item me-2">
-                        <button @click="getProject(currentPage + 1)" class="btn btn-primary next"
-                            :class="{ 'disabled': currentPage == lastPage }">&raquo;</button>
+                    <li class="page-item" v-for="page in lastPage" :class="{ 'active': page == currentPage }">
+                        <button class="page-link" @click="getProject(page)">{{ page }}</button>
+                    </li>
+                    <li class="page-item ms-2">
+                        <a @click="getProject(currentPage + 1)" class="btn btn-primary next"
+                            :class="{ 'disabled': currentPage == lastPage }">&raquo;</a>
                     </li>
                 </ul>
             </nav>
