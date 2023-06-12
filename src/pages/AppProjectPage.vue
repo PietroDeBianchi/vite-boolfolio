@@ -24,6 +24,15 @@
 
 <script>
 export default {
-    name: 'AppProjectPage'
+    name: 'AppProjectPage',
+    data() {
+        return {
+
+        }
+    },
+    mounted() {
+        const slug = this.$route.params.slug;
+        console.log(slug)
+    }
 }
 </script>

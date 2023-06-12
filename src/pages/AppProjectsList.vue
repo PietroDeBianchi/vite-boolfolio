@@ -1,7 +1,7 @@
 <template>
     <div class="container my-4">
         <div class="d-flex flex-wrap justify-content-between">
-            <div v-for="project in  projects " class="mt-4">
+            <div v-for="project in  projects " class="mt-4 px-2 w-25">
                 <AppProject :project="project"></AppProject>
             </div>
         </div>

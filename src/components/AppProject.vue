@@ -1,5 +1,5 @@
 <template>
-    <div class="card" id="cardContainer" style="width: 18rem; height: 26rem;">
+    <div class="card" id="cardContainer" style="height: 26rem;">
         <img v-if="project.image" :src="`${store.baseUrl}/storage/${project.image}`" class="card-img-top"
             :alt="project.title">
         <img v-else src="https://i.ebayimg.com/images/g/BBYAAOSwT-Neb3XT/s-l400.jpg" class="card-img-top"
