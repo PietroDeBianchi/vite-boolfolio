@@ -22,8 +22,8 @@ const router = createRouter({
             name: 'Project Page',
             component: AppProjectPage
         },
-        {
-            path: '/*',
+        { // allways->'/:pathMatch(.*)*' as last route!
+            path: '/:pathMatch(.*)*',
             name: 'Not found',
             component: AppNotFound
         }

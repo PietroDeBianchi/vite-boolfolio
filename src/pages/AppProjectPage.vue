@@ -47,7 +47,7 @@ export default {
                     // Update the project data, current page, and last page based on the API response
                     this.project = response.data.project;
                 } else {
-                    alert(response.data.error)
+                    this.$router.push({ name: 'Not found' })
                 }
             })
     }
