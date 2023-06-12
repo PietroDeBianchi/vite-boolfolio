@@ -23,7 +23,11 @@
             </div>
         </div>
     </div>
-    <div v-else></div>
+    <div v-else>
+        <div class="spinner-border text-success" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
 </template>
 
 <script>

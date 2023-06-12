@@ -1,8 +1,13 @@
 <template>
     <div class="container my-4">
         <div class="d-flex flex-wrap justify-content-between">
-            <div v-for="project in  projects " class="mt-4 px-2 w-25">
+            <div v-if="loading == false" v-for="project in  projects " class="mt-4 px-2 w-25">
                 <AppProject :project="project"></AppProject>
+            </div>
+            <div v-else>
+                <div class="spinner-border text-success" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
             </div>
         </div>
         <div class="pages mt-3">
@@ -35,7 +40,8 @@ export default {
             store, //*Base URL for API requests
             projects: [], // Array to store the project data
             currentPage: 1, // Current page of projects
-            lastPage: null // Last page of projects
+            lastPage: null, // Last page of projects
+            loading: true // Set loading
         }
     },
     components: {
@@ -54,6 +60,7 @@ export default {
                     this.projects = response.data.results.data;
                     this.currentPage = response.data.results.current_page;
                     this.lastPage = response.data.results.last_page;
+                    this.loading = false;
                     console.log(response); // Log the API response for debugging purposes
                 })
         }
